@@ -5,23 +5,23 @@ public class Log
 {
     int duration;
     int average;
-    LocalDate time;
+    LocalDateTime time;
 
     // constructor. Duration set to average
-    public Log(LocalDate time)
+    public Log(LocalDateTime time)
     {
         this.time = time;
         duration = average;
     }
     // constructor, both time and duration set with constructor
-    public Log(LocalDate time, int duration)
+    public Log(LocalDateTime time, int duration)
     {
         this.time = time;
         this.duration = duration;
     }
 
     // getters for time, duration and average
-    public LocalDate getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
@@ -42,7 +42,7 @@ public class Log
         this.average = average;
     }
 
-    public void setTime(LocalDate time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 }

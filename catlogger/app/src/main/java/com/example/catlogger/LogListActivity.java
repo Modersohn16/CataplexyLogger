@@ -20,15 +20,15 @@ public class LogListActivity extends AppCompatActivity {
 
     Button toMainButton;
     RecyclerView recyclerView;
-    List<LocalDateTime> listOfAttacks;
-    List<LocalDateTime> filteredListOfAttacks;
+    List<Log> listOfAttacks;
+    List<Log> filteredListOfAttacks;
     MyAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_list);
         toMainButton = (Button)findViewById(R.id.toMainButton);
-        listOfAttacks = MainActivity.listOfAttacks;
+        listOfAttacks = MainActivity.listOfLogs;
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         setListOfAttacksDummy(listOfAttacks);
         filteredListOfAttacks = filterByMonth(listOfAttacks,7);
@@ -53,7 +53,7 @@ public class LogListActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private void setListOfAttacksDummy(List <LocalDateTime> listOfAttacks)
+    private void setListOfAttacksDummy(List <Log> listOfAttacks)
     {
         List <String> strList = new ArrayList<>();
         Collections.addAll(strList,
@@ -151,15 +151,15 @@ public class LogListActivity extends AppCompatActivity {
         for(String str : strList)
         {
             LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
-            listOfAttacks.add(dateTime);
+            listOfAttacks.add(new Log(dateTime));
         }
     }
 
-    public List<LocalDateTime> filterByMonth(List<LocalDateTime> listOfAttacks, int month) {
-        List<LocalDateTime> filteredList = new ArrayList<LocalDateTime>();
-        for (LocalDateTime attack : listOfAttacks) {
+    public List<Log> filterByMonth(List<Log> listOfAttacks, int month) {
+        List<Log> filteredList = new ArrayList<Log>();
+        for (Log attack : listOfAttacks) {
             System.out.println("inside loop");
-            if (attack.getMonthValue() == month && attack.getYear() == 2021) {
+            if (attack.getTime().getMonthValue() == month && attack.getTime().getYear() == 2021) {
                 filteredList.add(attack);
                 System.out.println("inside if");
             }

@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewMain = (RecyclerView)findViewById(R.id.recyclerMain);
         timeTxt = (TextView)findViewById(R.id.timeTxt);
         listScreenButton = (Button)findViewById(R.id.toListBtn);
-        listOfAttacks = new ArrayList<LocalDateTime>();
+        listOfLogs = new ArrayList<Log>();
         DateTimeFormatter month_day = DateTimeFormatter.ofPattern("MMM dd");
         DateTimeFormatter hour_min = DateTimeFormatter.ofPattern("MMM dd - HH:mm");
         DateTimeFormatter month_day_hour_min = DateTimeFormatter.ofPattern("HH:mm");
@@ -53,12 +53,15 @@ public class MainActivity extends AppCompatActivity {
             {
 
                 LocalDateTime time = LocalDateTime.now();
-                listOfAttacks.add(time);
+                Log log = new Log(time);
+                listOfLogs.add(log);
                 counter++;
                 counterTxt.setText(Integer.toString(counter));
-                if(!listOfAttacks.isEmpty())
+                if(!listOfLogs.isEmpty())
                 {
-                    timeTxt.setText("Last attack at:" + "\n" + hour_min.format(listOfAttacks.get(listOfAttacks.size() - 1)));
+                    String str = listOfLogs.get(listOfLogs.size() - 1).getTime().format(hour_min);
+                    System.out.println(str);
+                    timeTxt.setText("Last attack at:" + "\n" + str);
                     adapter.notifyDataSetChanged();
                 }
                 else
@@ -78,16 +81,18 @@ public class MainActivity extends AppCompatActivity {
                 {
                     counter--;
 
-                    if(!listOfAttacks.isEmpty())
+                    if(!listOfLogs.isEmpty())
                     {
                         // delete last element in listOfAttacks list and update last attack text.
-                        listOfAttacks.remove(listOfAttacks.size() - 1);
+                        listOfLogs.remove(listOfLogs.size() - 1);
                         adapter.notifyDataSetChanged();
                     }
                     // if after removing the last date list is not empty, then update the text.
-                    if(!listOfAttacks.isEmpty())
+                    if(!listOfLogs.isEmpty())
                     {
-                        timeTxt.setText("Last attack at:" + "\n" + hour_min.format(listOfAttacks.get(listOfAttacks.size() - 1)));
+                        String str = listOfLogs.get(listOfLogs.size() - 1).getTime().format(hour_min);
+                        System.out.println(str);
+                        timeTxt.setText("Last attack at:" + "\n" + str);
                     }
                     else
                     {
@@ -115,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setAdapterMain()
     {
-        adapter = new MyAdapter(this, listOfAttacks, R.layout.item_list_main, R.id.itemTxtMain);
+        adapter = new MyAdapter(this, listOfLogs, R.layout.item_list_main, R.id.itemTxtMain);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerViewMain.setLayoutManager(layoutManager);
         recyclerViewMain.setItemAnimator(new DefaultItemAnimator());

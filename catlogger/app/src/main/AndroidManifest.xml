@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Catlogger">
         <activity
+            android:name=".SetDuration"
+            android:exported="true" />
+        <activity
             android:name=".LogListActivity"
             android:exported="true" />
         <activity

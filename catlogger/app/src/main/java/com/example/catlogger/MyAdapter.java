@@ -18,11 +18,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 {
 
     Context context;
-    List<LocalDateTime> listOfAttacks;
+    List<Log> listOfAttacks;
     int list_itemsId;
     int txtId;
 
-    public MyAdapter(Context ct, List<LocalDateTime> ListOfAttacks, int list_itemsId, int txtId)
+    public MyAdapter(Context ct, List<Log> listOfAttacks, int list_itemsId, int txtId)
     {
         context = ct;
         this.listOfAttacks = listOfAttacks;
@@ -41,7 +41,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position)
     {
         DateTimeFormatter hour_min = DateTimeFormatter.ofPattern("MMM dd - HH:mm");
-        holder.dateTxt.setText(hour_min.format(listOfAttacks.get(listOfAttacks.size() - 1 - position )));
+        holder.dateTxt.setText(listOfAttacks.get(listOfAttacks.size() - 1 - position).getTime().format(hour_min));
     }
 
     @Override
@@ -60,12 +60,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
         }
     }
 
-    public List<LocalDateTime> filterByDay(List<LocalDateTime> listOfAttacks, int month)
+    public List<Log> filterByDay(List<Log> listOfAttacks, int month)
     {
-        List<LocalDateTime> filteredList = new ArrayList<LocalDateTime>();
-        for(LocalDateTime attack : listOfAttacks)
+        List<Log> filteredList = new ArrayList<Log>();
+        for(Log attack : listOfAttacks)
         {
-            if(attack.getMonthValue() == month)
+            if(attack.getTime().getMonthValue() == month)
             {
                 filteredList.add(attack);
             }
