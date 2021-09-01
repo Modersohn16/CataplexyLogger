@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     tools:context=".MainActivity">
 
     <ImageView
@@ -99,6 +98,7 @@
         android:id="@+id/recyclerMain"
         android:layout_width="391dp"
         android:layout_height="273dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginTop="29dp"
         app:layout_constraintBottom_toTopOf="@+id/toListBtn"
         app:layout_constraintEnd_toEndOf="parent"
