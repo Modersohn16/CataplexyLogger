@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int counter = 0;
     static List<LocalDateTime> listOfAttacks;
+    static List<Log> listOfLogs;
     Button plusButton;
     Button minusButton;
     Button listScreenButton;
